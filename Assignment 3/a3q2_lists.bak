@@ -1,0 +1,58 @@
+#|
+  Author: joshua Harris
+  Student #: 101091864
+  ============================================================
+  |                      Assigment#3                         |
+  ============================================================
+|#
+(newline)
+(newline)
+(display "            Author: Joshua Harris                  Student #: 101091864")
+(newline)
+(display "            ============================================================")
+(newline)
+(display "            |                      Assigment#3                          |")
+(newline)
+(display "            ============================================================")
+(newline)
+(newline)
+(display "Qustion 2 a  (mean of list))")
+(newline)
+(display"CODE")
+(newline)
+(newline)
+(display"(define (mean x)")
+(newline)
+(display"  (define (mean-it lis sum num)")
+(newline)
+(display"    (cond((null? lis) (if (> num 0 )(/ sum num) 0))")
+(newline)
+(display"           ((number? (car lis)) (mean-it (cdr lis) (+ sum (car lis)) (+ num 1)))")
+(newline)
+(display"           (else (mean-it (cdr lis) sum num))))")
+(newline)
+(display"  (mean-it x 0 0))")
+(newline)
+
+(define (mean x)
+  (define (mean-it lis sum num)
+    (cond((null? lis) (if (> num 0 )(/ sum num) 0))
+           ((number? (car lis)) (mean-it (cdr lis) (+ sum (car lis)) (+ num 1)))
+           (else (mean-it (cdr lis) sum num))))
+  (mean-it x 0 0))
+
+(newline)
+(display"Test Cases")
+(newline)
+(display"(mean '(1 2 3 4 5)) Expected: 3 Actual: ")(mean '(1 2 3 4 5))
+(newline)
+(display"(mean '(a b s d c d s f)) Expected: 0 Actual : ")(mean '(a b s d c d s f))
+(newline)
+(display"(mean '(d 2 d f 4 e 2 f 7 h 9 h 6 )) Expected: 5 Actual: ")(mean '(d 2 d f 4 e 2 f 7 h 9 h 6 ))
+(newline)
+(displaY"(mean '(1 a 2 b c d e 3)) Expected: 2 Actual: ")(mean '(1 a 2 b c d e 3))
+
+
+
+
+

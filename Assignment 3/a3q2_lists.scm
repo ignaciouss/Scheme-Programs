@@ -1,0 +1,217 @@
+#|
+  Author: joshua Harris
+  Student #: 101091864
+  ============================================================
+  |                      Assigment#3                         |
+  ============================================================
+|#
+(newline)
+(newline)
+(display "            Author: Joshua Harris                  Student #: 101091864")
+(newline)
+(display "            ============================================================")
+(newline)
+(display "            |                      Assigment#3                          |")
+(newline)
+(display "            ============================================================")
+(newline)
+(newline)
+(display "Qustion 2 a  (mean of list))")
+(newline)
+(display"CODE")
+(newline)
+(newline)
+(display"(define (mean x)")
+(newline)
+(display"  (define (mean-it lis sum num)")
+(newline)
+(display"    (cond((null? lis) (if (> num 0 )(/ sum num) 0))")
+(newline)
+(display"           ((number? (car lis)) (mean-it (cdr lis) (+ sum (car lis)) (+ num 1)))")
+(newline)
+(display"           (else (mean-it (cdr lis) sum num))))")
+(newline)
+(display"  (mean-it x 0 0))")
+(newline)
+
+(define (mean x)
+  (define (mean-it lis sum num)
+    (cond((null? lis) (if (> num 0 )(/ sum num) 0))
+           ((number? (car lis)) (mean-it (cdr lis) (+ sum (car lis)) (+ num 1)))
+           (else (mean-it (cdr lis) sum num))))
+  (mean-it x 0 0))
+
+(newline)
+(display"Test Cases")
+(newline)
+(display"(mean '(1 2 3 4 5)) Expected: 3 Actual: ")(mean '(1 2 3 4 5))
+(newline)
+(display"(mean '(a b s d c d s f)) Expected: 0 Actual : ")(mean '(a b s d c d s f))
+(newline)
+(display"(mean '(d 2 d f 4 e 2 f 7 h 9 h 6 )) Expected: 5 Actual: ")(mean '(d 2 d f 4 e 2 f 7 h 9 h 6 ))
+(newline)
+(displaY"(mean '(1 a 2 b c d e 3)) Expected: 2 Actual: ")(mean '(1 a 2 b c d e 3))
+
+(newline)
+(newline)
+(display "Qustion 2 b  (slice of list))")
+(newline)
+(display"CODE")
+(newline)
+(newline)
+(display "(define (slice lis start end)")
+(newline)
+(display "  (define (slice-it newL list counter)")
+(newline)
+(display "    (cond ((null? list) newL)")
+(newline)
+(display "          ((= counter end) newL)")
+(newline)
+(display "          ((and (>= counter start)(< counter end)) (slice-it (cons (car list) newL) (cdr list) (+ counter 1)))")
+(newline)
+(display "          (else (slice-it newL (cdr list) (+ counter 1)))) ")
+(newline)
+(display "  (reverse(slice-it '() lis 0)))")
+(newline)
+(display "")
+(newline)
+(display "")
+(newline)
+(display "")
+(newline)
+(display "")
+(newline)
+
+(define (slice lis start end)
+  (define (slice-it newL list counter)
+    (cond ((null? list) newL)
+          ((= counter end) newL)
+          ((and (>= counter start)(< counter end)) (slice-it (cons (car list) newL) (cdr list) (+ counter 1)))
+          (else (slice-it newL (cdr list) (+ counter 1)))))
+  (reverse (slice-it '() lis 0)))
+
+
+
+(newline)
+(newline)
+(display "Test Cases")
+(newline)
+(newline)
+(display "(slice '(0 1 2 3 4 5 6 7 8 9) 3 8)  Expected: (3 4 5 6 7)   Actual: ")(slice '(0 1 2 3 4 5 6 7 8 9) 3 8)
+(newline)
+(display "(slice '(0 1 2 3 4 5 6 7 8 9) 5 25) Expected: (5 6 7 8 9)  Actual: ")(slice '(0 1 2 3 4 5 6 7 8 9) 5 25)
+(newline)
+(display "(slice '(0 1 2 3 4 5) -10 3)  Expected:(0 1 2) Actual: ")(slice '(0 1 2 3 4 5) -10 3) 
+(newline)
+(newline)
+;Question 2 c
+(newline)
+(display"Question 2 c  (preceeding negative numbers")
+(newline)
+(display "Code")
+(newline)
+(newline)
+(display"(define (preceeding x)")
+(newline)
+(display"  (define (pre-it values ind prev lis counter)")
+(newline)
+(display"    (cond ((null? lis) (cons values ind))")
+(newline)
+(display"          ((and (> counter 0)(< (car lis) 0)) (pre-it (cons prev values) (cons (- counter 1) ind) (car lis) (cdr lis) (+ counter 1)))")
+(newline)
+(display"        (else (pre-it values ind (car lis) (cdr lis) (+ counter 1)))")
+(newline)
+(display"    ))(pre-it '() '() 0 x 0))")
+(newline)
+(display"")
+(newline)
+(display"")
+(newline)
+
+
+
+(define (preceeding x)
+
+  (define (pre-it values ind prev lis counter)
+    (cond ((null? lis) (cons values ind))
+          ((and (> counter 0)(< (car lis) 0)) (pre-it (cons prev values) (cons (- counter 1) ind) (car lis) (cdr lis) (+ counter 1)))
+          (else (pre-it values ind (car lis) (cdr lis) (+ counter 1)))
+    ))(pre-it '() '() 0 x 0)
+
+  )
+;TESTS
+(display"(preceeding '(1 -2 3 4 -5 6 -7 -8)) Expected:((-7 6 4 1) 6 5 3 0)  Actual: ")(preceeding '(1 -2 3 4 -5 6 -7 -8))
+(newline)
+(display"(preceeding '(-11 -2 3 -4 -5 6 -7 -8 24 -87 -47  7 9 5))  Expected:((-87 24 -7 6 -4 3 -11) 9 8 6 5 3 2 0) Actual: ) ")(preceeding '(-11 -2 3 -4 -5 6 -7 -8 24 -87 -47  7 9 5))
+(newline)
+(display"(preceeding '(-1)) Expected: Empty List Actual: ")(preceeding '(-1))
+(newline)
+(display"")
+(newline)
+
+
+;Question 2 d
+
+(display" Question 2 d")
+(newline)
+(newline)
+(display"Code in code ")
+(newline)
+(newline)
+(display"")
+(newline)
+(display"")
+(newline)
+(display"")
+(newline)
+(display"")
+(newline)
+(display"")
+(newline)
+(display"")
+(newline)
+(display"")
+(newline)
+;START OF CODE
+
+
+(define (maxNum k)
+
+  (define (maxInd max h)  
+  (if (> max h) max h))
+  
+  (define (max-it m n)
+    (cond((null? n) m)
+        (else (max-it (maxInd m (car n)) (cdr n) ))))
+  (max-it 0 k))
+
+
+(define (tails l)
+
+    (define (tail t)
+    (cond ((= (maxNum t) (car t))(cdr t))
+          (else (tail (cdr t)))))
+  
+  (define (tail-it lisr lisl)
+    (cond ((null? lisr) lisl)
+        (else (tail-it (tail lisr) (cons  (tail lisr) lisl)))))
+  (reverse (tail-it l '()) ))
+
+
+
+
+(newline)
+(display"TEST CASES")
+(newline)
+(display"(tails '(3 6 8 9 7 4 8 6 3)) Expected:((7 4 8 6 3) (6 3) (3) ()) Actual: ")(tails '(3 6 8 9 7 4 8 6 3))
+(newline)
+(display"(tails '(4 2 8 7 8 1 2)) Expected :((7 8 1 2) (1 2) ())  Actual: ")(tails '(4 2 8 7 8 1 2))
+(newline)
+(display"(tails '(4 2 8 7 8 1 2 7 3 4 0 3 1 2 28 4)) Expected:((4) ())  Actual: ")(tails '(4 2 8 7 8 1 2 7 3 4 0 3 1 28 4))
+(newline)
+(display"")
+(newline)
+
+
+
+
